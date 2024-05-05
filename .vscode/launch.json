@@ -5,36 +5,29 @@
             "name": "Debug App",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build all solutions",
+            "preLaunchTask": "set environment variable and build",
             "program": "${workspaceFolder}/${input:chosenSolution}/App/bin/Debug/net*/App.dll",
             "args": [],
             "cwd": "${workspaceFolder}/${input:chosenSolution}/App",
             "console": "integratedTerminal",
-            "stopAtEntry": false
+            "stopAtEntry": false,
+            "env": {
+                "CHOSEN_SOLUTION": "${input:chosenSolution}"
+            }
         },
         {
             "name": "Debug Tests",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build all solutions",
+            "preLaunchTask": "set environment variable and build",
             "program": "${workspaceFolder}/${input:chosenSolution}/Tests/bin/Debug/net*/Tests.dll",
             "args": [],
             "cwd": "${workspaceFolder}/${input:chosenSolution}/Tests",
             "console": "integratedTerminal",
-            "stopAtEntry": false
-        }
-    ],
-    "inputs": [
-        {
-            "id": "chosenSolution",
-            "description": "Select the solution to debug:",
-            "type": "pickString",
-            "options": [
-                "Solution1",
-                "Solution2"
-                // Add more solutions as necessary
-            ],
-            "default": "Solution1"
+            "stopAtEntry": false,
+            "env": {
+                "CHOSEN_SOLUTION": "${input:chosenSolution}"
+            }
         }
     ]
 }

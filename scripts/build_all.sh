@@ -1,8 +1,12 @@
 #!/bin/bash
-# Navigate to each directory and find solution files to build them
-for dir in */ ; do
-    if ls $dir*.sln 1> /dev/null 2>&1; then
-        echo "Building solution in $dir"
-        dotnet build "$dir"*.sln --no-restore
-    fi
-done
+# Build only the specified solution directory
+solution_dir=$1
+# Ensure there is a trailing slash
+[[ "$solution_dir" != */ ]] && solution_dir="$solution_dir/"
+
+if [ -d "$solution_dir" ] && ls ${solution_dir}*.sln 1> /dev/null 2>&1; then
+    echo "Building solution in $solution_dir"
+    dotnet build "${solution_dir}"*.sln --no-restore
+else
+    echo "No solution found in $solution_dir or the directory does not exist."
+fi
